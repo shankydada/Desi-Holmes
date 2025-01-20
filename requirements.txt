@@ -1,3 +1,4 @@
+scikit-learn
 gunicorn==23.0.0
 aiohappyeyeballs==2.4.4
 aiohttp==3.11.11
