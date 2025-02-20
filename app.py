@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 current_directory = os.getcwd()
-file_path1=os.path.join(current_directory, 'template')
+file_path1 = os.path.join(current_directory, 'template')
 
 app = Flask(__name__, template_folder=r'template')
 
@@ -16,17 +16,14 @@ model = pickle.load(open('model.pkl', 'rb'))
 vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
 # Load the dataset
-#file_name = r"D:\My Project\Bittu\new\Desi_Holmes\sherlock_holmes_cases.csv"
-file_name=os.path.join(current_directory, 'sherlock_holmes_cases.csv')
+file_name = os.path.join(current_directory, 'sherlock_holmes_cases.csv')
 df = pd.read_csv(file_name)
-
 
 @app.route('/')
 def home():
     print("Current working directory:", os.getcwd())
     print("Template path:", os.path.join(os.getcwd(), 'templates', 'index.html'))
     return render_template('index.html')
-
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -49,7 +46,6 @@ def predict():
 
     return jsonify(response)
 
-
 def generate_case_analysis(new_case_description):
     # Transform the new case description
     new_case_vector = vectorizer.transform([new_case_description])
@@ -66,22 +62,21 @@ def generate_case_analysis(new_case_description):
     observations = []
     leads = []
     for i, case in similar_cases.iterrows():
-        # Extract common keywords or themes from the cases
-        common_keywords = set(new_case_description.split()).intersection(set(case['description'].split()))
-        common_keywords_str = ', '.join(common_keywords) if common_keywords else "No significant keywords found"
+        confidence_score = round(similarities[i] * 100, 2)
+        if confidence_score >= 10:  # Filter out confidence scores greater than 10
+            common_keywords = set(new_case_description.split()).intersection(set(case['description'].split()))
+            common_keywords_str = ', '.join(common_keywords) if common_keywords else "No significant keywords found"
 
-        # Formulate observations based on specific insights
-        observations.append(
-            f"Similar case: '{case['description']}' with status '{case['status']}'. Common keywords: {common_keywords_str}.")
+            observations.append(
+                f"Similar case: '{case['description']}' with status '{case['status']}'. Common keywords: {common_keywords_str}."
+            )
 
-        # Generate leads with actionable insights
-        leads.append({
-            "Lead": f"Derived from case '{case['description']}'",
-            "Confidence Score": round(similarities[i] * 100, 2),
-            "Suggested Action": f"Investigate patterns or evidence similar to case '{case['description']}'."
-        })
+            leads.append({
+                "Lead": f"Derived from case '{case['description']}'",
+                "Confidence Score": confidence_score,
+                "Suggested Action": f"Investigate patterns or evidence similar to case '{case['description']}'."
+            })
 
-    # Default next steps
     next_steps = [
         "Compare forensic evidence with similar past cases.",
         "Conduct additional witness interviews to gather insights.",
@@ -93,7 +88,6 @@ def generate_case_analysis(new_case_description):
         "Leads": leads,
         "Next Steps": next_steps
     }
-
 
 if __name__ == "__main__":
     app.run(debug=True)
