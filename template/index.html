@@ -5,11 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Prediction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "G2pbUeTF-UWVDTrkh",
+            });
+        })();
+    </script>
+<script>
+    function SendMail(){
+    let parms={
+      name : document.getElementById("name").value,
+      email : document.getElementById("email").value,
+      mobile : document.getElementById("mobile").value,
+      message : document.getElementById("message").value,
+    }
+    emailjs.send("service_qzcrywp","template_fr6uhdr",parms).then(alert("Email has been sent"))
+  }
+</script>
+    <script src="server.js"></script>
+
     <style>
         /* General Styles */
         body {
             font-family: 'Arial', sans-serif;
-
+background-color: grey;
             color: white;
             margin: 0;
             padding: 0;
@@ -27,6 +50,19 @@
             z-index: -1;
 
         }
+
+#homecntnt{
+ position: relative;
+            z-index: 5;
+            padding: 40px 20px;
+            backdrop-filter: blur(1px);
+            border-radius: 8px;
+
+            max-width: 1520px;
+            border: 4px solid black;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
 
         /* Section Styling */
         .section {
@@ -53,7 +89,7 @@
 
         /* Form Elements */
         .textarea {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.9);
             color: black;
             border: 4px solid #4a4848;
         }
@@ -92,12 +128,17 @@
 
         /* Result Box */
         #result {
-            background: rgba(203, 198, 198, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 8px;
             padding: 20px;
-            color: white;
+            color: rgb(213, 216, 220);
             margin-top: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+           font-size: large;
+           font-family:"Courier New", monospace;
+           font-weight: bold;
+
+
           
         }
 
@@ -109,19 +150,31 @@
         #result ul {
             margin-left: 20px;
             list-style-type: disc;
+
         }
 
 
 
          /* Case History Styling */
-        #case-history {
-            background: rgba(203, 198, 198, 0.4);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
+       #case-history {
+    max-height: 600px; /* Limits the height */
+    overflow-y: auto;  /* Enables vertical scrolling */
+    background: rgba(203, 198, 198, 0.4);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+       }
 
+       /* Optional: Add a scrollbar style for better UI */
+       #case-history::-webkit-scrollbar {
+           width: 8px;
+       }
+
+       #case-history::-webkit-scrollbar-thumb {
+           background: #f39c12;
+           border-radius: 4px;
+       }
         #case-history h2 {
             color: #f39c12;
             margin-bottom: 10px;
@@ -150,13 +203,274 @@
                 width: 100%;
             }
         }
+
+
+
+
+
+
+
+
+               /* Hero Section */
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?crime,investigation') center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            width: 100%;
+            height: 70%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .hero h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-top: 10px;
+            color: #f39c12;
+        }
+
+        /* Feature Section */
+        .features {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-box {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            background: #f39c12;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+
+
+         /* About Section */
+        .about2 {
+            padding: 60px 20px;
+<!--            background-color: rgb(148, 150, 153);-->
+             background: url("https://www.istockphoto.com/photo/robot-working-with-digital-display-gm686690190-126149361?utm_campaign=srp_photos_bottom&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Frobot-bot&utm_medium=affiliate&utm_source=unsplash&utm_term=robot+bot%3A%3Avideo-affiliates%3Acontrol");
+        }
+
+        .about-container2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-text2 {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about2 h2{
+         co
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 20px;
+        }
+
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 165, 0, 0.5);
+        }
+
+        /* Business Model Section */
+        .business {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .business p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .button {
+            background: #f39c12;
+            color: black;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+
+
+
+
+
+        /* Contact Form Styling */
+        .contact {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 1550px;
+            margin: 0px auto;
+            box-shadow: 0px 4px 10px rgba(255, 165, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact p {
+        margin-bottom: 50px;
+        }
+
+        .contact h2 {
+            color: #f39c12;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 10px;
+        }
+        .form-group {
+            margin-bottom: 5px;
+            width: 48%;
+            min-width: 280px;
+        #waheed {
+             margin-top: 20px;
+            }
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #f39c12;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            color: white;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            padding: 12px;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #22c1c3, #fdbb2d);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-group {
+                width: 100%;
+            }
+        }
+
+
     </style>
 </head>
 <body>
 
+
+
+<div id="homecntnt">
+
+<!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Desi Holmes – AI-Powered Crime Investigation Assistant</h1>
+            <p>"Justice delayed is justice denied."</p>
+        </div>
+    </div>
+
     <div>
         <video autoplay muted loop src="{{ url_for('static', filename='vdo1.mp4') }}"></video>
     </div>
+
+
+
+
 
     <section class="section">
         <div class="container">
@@ -196,8 +510,101 @@
         </div>
     </section>
 
+</div>
+
+ <!-- About Us Section -->
+    <section class="about2" >
+
+        <div class="about-container2">
+            <div class="about-text2">
+                <h2 class="title">🔍 About Our Model</h2>
+                <p>A Desi Holmes is an advanced AI assistant designed to revolutionize crime investigation. Equipped with cutting-edge machine learning and deep learning technologies, our AI bot helps investigation officers solve cases faster by analyzing crime scenes, recognizing patterns, detecting objects, and comparing cases to generate the most accurate theories based on available evidence.
+
+With the ability to process both past case data and real-time observations, Desi Holmes ensures that every minute detail is examined. Our AI bot generates multiple theories, compares them, and presents the best possible conclusions with confidence scores—helping officers make informed decisions quickly. </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="title">🚀 Key Features</h2>
+        <div class="feature-box">
+            <div class="feature">
+                <i class="fas fa-brain"></i>
+                <h3>Pattern Recognition</h3>
+            </div>
+            <div class="feature">
+                <i class="fas fa-eye"></i>
+                <h3>Object Detection</h3>
+            </div>
+            <div class="feature">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Case Comparison</h3>
+            </div>
+            <div class="feature">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Logical Theory Building</h3>
+            </div>
+            <div class="feature">
+                <i class="fas fa-database"></i>
+                <h3>Real-time Analysis</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 class="title"> AI Investigation</h2>
+                <p>At Desi Holmes, we believe that speed and accuracy in crime investigation are critical to delivering justice. Our AI-powered assistant empowers investigation officers with deep insights, advanced analytics, and real-time crime scene observations.</p>
+            </div>
+<!--            <div class="about-img title">-->
+<!--                <img src="https://source.unsplash.com/500x300/?forensics,ai" alt="AI Investigation">-->
+<!--            </div>-->
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section class="business">
+        <h2 class="title">💼 Business Model</h2>
+        <p>Desi Holmes is available for both government agencies and private detectives.</p>
+        <div class="buttons control" >
+            <button class="button is-primary">Government Contracts</button>
+            <button class="button is-danger">Private Subscription</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact ">
+        <h2 class="title">📩 Get in Touch</h2>
+        <p>If you're an investor, detective, or law enforcement officer interested in our AI-powered crime investigation system, reach out to us.</p>
+        <form action="" id="form">
+            <div class="form-group " id="waheed">
+                <input id="name" class="form-control" type="text" placeholder="Name *" required>
+            </div>
+            <div class="form-group">
+                <input id="email" class="form-control" type="email" placeholder="Email *" required>
+            </div>
+            <div class="form-group">
+                <input id="mobile" class="form-control" type="number" placeholder="Mobile Number *" required>
+            </div>
+            <div class="form-group">
+                <textarea id="message" class="form-control" placeholder=" Enter Your Message Here... *" rows="7" required></textarea>
+            </div>
+            <div class="form-group ">
+                <button type="submit" class="form-control btn btn-primary" onclick="SendMail()">Send Message</button>
+            </div>
+        </form>
+    </section>
+
 
     <script>
+
+
+
+
 
          const cases = [
             {
@@ -273,9 +680,9 @@
                 status: "Unsolved",
                 description: "Holmes faces off against his arch-nemesis, Professor Moriarty, at Reichenbach Falls. A struggle ensues, and both are presumed to fall to their deaths, though Holmes later reappears alive."
             },
+            
             // Add additional cases here
         ];
-
 
 
 function showPredict() {
@@ -296,23 +703,48 @@ function showPredict() {
             const data = await response.json();
             document.getElementById('result').innerHTML = `
                 <h2 class="subtitle">Predicted Status: ${data.prediction}</h2>
-                <h4>Observations:</h4>
-                <ul>${data.analysis.Observations.map(obs => `<li>${obs}</li>`).join('')}</ul>
-                <h4>Leads:</h4>
-                <ul>${data.analysis.Leads.map(lead => `
-                    <li>
-                        <strong>${lead.Lead}</strong><br/>
-                        Confidence Score: ${lead['Confidence Score']}<br/>
-                        Suggested Action: ${lead['Suggested Action']}
-                    </li>`).join('')}
-                </ul>
-                <h4>Next Steps:</h4>
-                <ul>${data.analysis['Next Steps'].map(step => `<li>${step}</li>`).join('')}</ul>
+
+        <div class="toggle-buttons">
+            <button class="button is-warning" onclick="toggleSection('observations')">Observations</button>
+            <button class="button is-info" onclick="toggleSection('leads')">Leads</button>
+            <button class="button is-success" onclick="toggleSection('nextSteps')">Next Steps</button>
+        </div>
+
+        <div id="observations" class="toggle-content" style="display: none;">
+            <h4>Observations:</h4>
+            <ul>${data.analysis.Observations.map(obs => `<li>${obs}</li>`).join('')}</ul>
+        </div>
+
+        <div id="leads" class="toggle-content" style="display: none;">
+            <h4>Leads:</h4>
+            <ul>${data.analysis.Leads.map(lead => `
+                <li>
+                    <strong style = "color: #f3f571;">${lead.Lead}</strong><br/>
+                    Confidence Score: ${lead['Confidence Score']}<br/>
+                    Suggested Action: ${lead['Suggested Action']}
+                </li>`).join('')}
+            </ul>
+        </div>
+
+        <div id="nextSteps" class="toggle-content" style="display: none;">
+            <h4>Next Steps:</h4>
+            <ul>${data.analysis['Next Steps'].map(step => `<li>${step}</li>`).join('')}</ul>
+        </div>
+
             `;
         }
 
+<!--function toggleSection(sectionId) {-->
+<!--    const section = document.getElementById(sectionId);-->
+<!--    section.style.display = section.style.display === 'none' ? 'block' : 'none';-->
+<!--}-->
 
-
+function toggleSection(sectionId) {
+    document.querySelectorAll('.toggle-content').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
+}
 
  function showCaseHistory() {
             document.getElementById('predict-section').style.display = 'none';
@@ -353,6 +785,18 @@ function showPredict() {
             });
             displayCases(filteredCases);
         }
+
+
+          document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            });
+            document.querySelectorAll(".fade-in").forEach(element => observer.observe(element));
+        });
     </script>
 </body>
 </html>
